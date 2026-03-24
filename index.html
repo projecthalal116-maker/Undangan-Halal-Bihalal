@@ -12,6 +12,8 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SoundCloud Widget API (untuk kontrol loop) -->
+  <script src="https://w.soundcloud.com/player/api.js"></script>
   
   <!-- Tailwind Configuration for Custom Colors & Fonts -->
   <script>
@@ -358,7 +360,30 @@
       
       // Mainkan musik SoundCloud dengan menyematkan iframe saat tombol ditekan (menghindari blokir autoplay browser)
       var audioContainer = document.getElementById('audio-container');
-      audioContainer.innerHTML = '<iframe width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/shb-bahri/maher-zain-x-harris-j-qalbi&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false"></iframe>';
+      var scUrl = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent('https://soundcloud.com/dengerin-musik-797697733') + '&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false';
+      audioContainer.innerHTML = `<iframe id="sc-player" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="${scUrl}"></iframe>`;
+
+      // Inisialisasi widget dan bind event FINISH untuk loop
+      // Gunakan global window.scWidget agar tidak membuat binding ganda saat tombol ditekan berulang
+      setTimeout(function() {
+        if (window.SC && !window.scWidget) {
+          var iframe = document.getElementById('sc-player');
+          if (iframe) {
+            window.scWidget = SC.Widget(iframe);
+            window.scWidget.bind(SC.Widget.Events.FINISH, function() {
+              try {
+                window.scWidget.seekTo(0);
+                window.scWidget.play();
+              } catch (e) {
+                // fallback: reload iframe source
+                iframe.src = scUrl;
+              }
+            });
+          }
+        } else if (window.scWidget) {
+          window.scWidget.play();
+        }
+      }, 300);
 
       // Animasi cover naik ke atas (fade out)
       var cover = document.getElementById('cover');
