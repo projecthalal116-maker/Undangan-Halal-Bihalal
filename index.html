@@ -84,31 +84,35 @@
       background: #d97706; 
       border-radius: 10px;
     }
+    /* Slow spin animation for music button */
+    @keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .music-spin { animation: slow-spin 4s linear infinite; }
   </style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-800 antialiased overflow-hidden" id="bodyWrap">
 
   <!-- AUDIO CONTAINER (menyimpan elemen audio lokal) -->
   <div id="audio-container" class="hidden"></div>
-  <audio id="bgm" loop preload="auto" class="hidden" src="https://rr1---sn-npoe7ndl.googlevideo.com/videoplayback?expire=1774376279&ei=94DCaYevOYnb1d8PhsXl6Ak&ip=125.179.103.123&id=o-AKG_-kA6bBVK0LfiPNGLmv2w2H1E-P9Zp5miT_a4Gg48&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=237&bui=AUUZDGIohEo640OvOVYJLWb2EaIW9tJ7pIbMPMcETmrIzNOozl361WHPATNVtdiTBHmSuAMRblwS56mX&spc=jlWavQk_EQddorLYterfEd0U7C3OImoTZIHdp0ksO_KeY40I&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=558133&dur=31.321&lmt=1743831493714580&keepalive=yes&fexp=51565115,51565681,51791334&c=ANDROID_VR&txp=5432534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AHEqNM4wRQIgFf7IbzjxtC4H9EOEb_C4MJ-OgI_4FNDcypy-M0F2y9gCIQCuCUq2nTvguFCmjE31at_7-k1Hh3rCbnONvAKz-2H1AA%3D%3D&rm=sn-ab02a0nfpgxapox-bh26676,sn-3pmsl76&rrc=79,104&req_id=ca54e6fbbe33a3ee&rms=nxu,au&redirect_counter=2&cms_redirect=yes&cmsv=e&ipbypass=yes&met=1774354705,&mh=2D&mip=210.87.74.143&mm=30&mn=sn-npoe7ndl&ms=nxu&mt=1774354129&mv=m&mvi=1&pl=24&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRQIgDsxJ9pRjjzX1aroy5SefM0RQjNC3FO54go4xKTX6QMwCIQCJkUhJ3Fz-YVhcswTZQZq21WgpVr7pcLpLo-fPcVTJMg%3D%3D">
-    <source src="https://rr1---sn-npoe7ndl.googlevideo.com/videoplayback?expire=1774376279&ei=94DCaYevOYnb1d8PhsXl6Ak&ip=125.179.103.123&id=o-AKG_-kA6bBVK0LfiPNGLmv2w2H1E-P9Zp5miT_a4Gg48&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=237&bui=AUUZDGIohEo640OvOVYJLWb2EaIW9tJ7pIbMPMcETmrIzNOozl361WHPATNVtdiTBHmSuAMRblwS56mX&spc=jlWavQk_EQddorLYterfEd0U7C3OImoTZIHdp0ksO_KeY40I&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=558133&dur=31.321&lmt=1743831493714580&keepalive=yes&fexp=51565115,51565681,51791334&c=ANDROID_VR&txp=5432534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AHEqNM4wRQIgFf7IbzjxtC4H9EOEb_C4MJ-OgI_4FNDcypy-M0F2y9gCIQCuCUq2nTvguFCmjE31at_7-k1Hh3rCbnONvAKz-2H1AA%3D%3D&rm=sn-ab02a0nfpgxapox-bh26676,sn-3pmsl76&rrc=79,104&req_id=ca54e6fbbe33a3ee&rms=nxu,au&redirect_counter=2&cms_redirect=yes&cmsv=e&ipbypass=yes&met=1774354705,&mh=2D&mip=210.87.74.143&mm=30&mn=sn-npoe7ndl&ms=nxu&mt=1774354129&mv=m&mvi=1&pl=24&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRQIgDsxJ9pRjjzX1aroy5SefM0RQjNC3FO54go4xKTX6QMwCIQCJkUhJ3Fz-YVhcswTZQZq21WgpVr7pcLpLo-fPcVTJMg%3D%3D" type="audio/mpeg">
+  <audio id="bgm" loop preload="auto" class="hidden" src="https://files.catbox.moe/1cdmy7.mp3">
+    <source src="https://files.catbox.moe/1cdmy7.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Floating Music Control (Play / Pause) -->
-  <button id="musicToggle" aria-label="Play music" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-white/90 text-emerald-900 flex items-center justify-center shadow-lg hover:scale-105 transition-transform hidden">
-    <!-- Play Icon -->
-    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.518-3.758A1 1 0 007 8.298v7.404a1 1 0 001.234.97l6.518-1.83a1 1 0 00.748-.97v-3.796a1 1 0 00-.748-.97z" />
+  <button id="musicToggle" aria-label="Play music" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white/30 text-emerald-900 flex items-center justify-center shadow-md hover:scale-105 transition-transform hidden">
+    <!-- Note Icon (visible when playing) -->
+    <svg id="icon-note" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden opacity-70" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 17V5l10-3v12a3 3 0 11-2-0.16V8.18L11 10v7a3 3 0 11-2 0z"/>
     </svg>
-    <!-- Pause Icon -->
-    <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6" />
+    <!-- Speaker-Off Icon (visible when paused) -->
+    <svg id="icon-speaker-off" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+      <path d="M23 9L17 15M17 9l6 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
 
   <!-- ================= COVER SECTION ================= -->
   <section id="cover" class="fixed inset-0 z-50 flex items-center justify-center bg-pattern text-white px-4 transition-all duration-1000" style="background-image: url('https://wallpapers.com/images/hd/scenic-kaaba-phone-uubdpqj8sdrvsjte.jpg'); background-size: cover; background-position: left;">
-    <div class="relative w-full max-w-md bg-[#851aa3]/50 backdrop-blur-md border border-gold-500/30 rounded-3xl shadow-2xl p-8 text-center overflow-hidden">
+    <div class="relative w-full max-w-md bg-[#7d43b0]/50 backdrop-blur-md border border-gold-500/30 rounded-3xl shadow-2xl p-8 text-center overflow-hidden">
       
       <!-- Ornamen Lampion Gantung (Kiri & Kanan Atas) -->
       <div class="absolute top-0 left-6 opacity-60 animate-float" style="animation-delay: 0.5s;">
@@ -257,8 +261,8 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               </div>
               <div>
-                <h4 class="font-semibold text-lg text-gold-400">Lokasi Aula Darul Aitam, Jagalan </h4>
-                <p class="text-sm text-gold-400">Kepatihan, Jombang, Kec. Jombang, Kabupaten Jombang, Jawa Timur</p>
+                <h4 class="font-semibold text-lg text-gold-400">Kantor Yayasan Roushon Fikr. Gedung KB Roushon Fikr Lt.2</h4>
+                <p class="text-sm text-gold-400">Jl. Sisingamangaraja II No.4 Jagalan Jombang</p>
               </div>
             </div>
           </div>
@@ -269,10 +273,10 @@
       <section class="px-6 mb-12 animate-fade-in-up" style="animation-delay: 0.7s;">
         <h3 class="font-serif text-xl text-gold-400 text-center mb-4">Peta Lokasi</h3>
         <div class="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-800/50 relative h-64">
-          <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.324355102145!2d112.2309722!3d-7.539560299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e784001c7243409%3A0x78e8cecf7559b2ab!2sSMP%20Islam%20Brawijaya!5e0!3m2!1sid!2sid!4v1774342671403!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.3253336592684!2d112.2308468!3d-7.5394532000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7841a2bbd8e07f%3A0xc1867b288de81ead!2sBiro%20Psikologi%20Roushon%20Fikr%20Jombang!5e0!3m2!1sid!2sid!4v1774402559142!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="mt-4 text-center">
-          <a href="https://maps.app.goo.gl/ybcb5ejDta3doubp9" target="_blank" class="inline-flex items-center text-sm text-emerald-200 hover:text-gold-400 transition-colors">
+          <a href="https://maps.app.goo.gl/JmrAK7drNtArzs9n6" target="_blank" class="inline-flex items-center text-sm text-emerald-200 hover:text-gold-400 transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             Buka di Google Maps
           </a>
@@ -405,15 +409,21 @@
         var pauseIcon = document.getElementById('icon-pause');
         var btn = document.getElementById('musicToggle');
         if (!btn) return;
-        if (isPlaying) {
-          playIcon.classList.add('hidden');
-          pauseIcon.classList.remove('hidden');
-          btn.setAttribute('aria-label', 'Pause music');
-        } else {
-          playIcon.classList.remove('hidden');
-          pauseIcon.classList.add('hidden');
-          btn.setAttribute('aria-label', 'Play music');
-        }
+          var noteIcon = document.getElementById('icon-note');
+          var speakerOffIcon = document.getElementById('icon-speaker-off');
+          if (isPlaying) {
+            // Show note while playing, hide speaker-off, add spin
+            noteIcon.classList.remove('hidden');
+            speakerOffIcon.classList.add('hidden');
+            btn.classList.add('music-spin');
+            btn.setAttribute('aria-label', 'Pause music');
+          } else {
+            // Show speaker-off while paused, hide note, remove spin
+            noteIcon.classList.add('hidden');
+            speakerOffIcon.classList.remove('hidden');
+            btn.classList.remove('music-spin');
+            btn.setAttribute('aria-label', 'Play music');
+          }
       }
 
       document.addEventListener('DOMContentLoaded', function() {
